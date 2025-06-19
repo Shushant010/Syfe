@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { Goal, Contribution, DashboardStats } from '../types';
+import { Goal, Contribution, DashboardStats } from '../types/index';
 import { useExchangeRate } from '../hooks/useExchangeRate';
 import DashboardHeader from '../components/DashboardHeader';
 import AddGoalForm from '../components/AddGoalForm';
