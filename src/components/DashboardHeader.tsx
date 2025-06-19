@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { RefreshCw } from 'lucide-react';
-import { DashboardStats, ExchangeRate } from '../types/index';
-import { formatCurrency, convertCurrency } from '../utils/currency';
+import { DashboardStats, ExchangeRate } from '../types';
+import { formatCurrency } from '../utils/currency';
 
 interface DashboardHeaderProps {
   stats: DashboardStats;
@@ -15,15 +14,14 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   stats,
   exchangeRate,
   onRefreshRate,
-  loading
+  loading,
 }) => {
-  const convertedTargetUSD = exchangeRate ? 
-    convertCurrency(stats.totalTarget, 'INR', 'USD', exchangeRate.rate) : 
-    0;
-  
-  const convertedSavedUSD = exchangeRate ? 
-    convertCurrency(stats.totalSaved, 'INR', 'USD', exchangeRate.rate) : 
-    0;
+  // Combine currencies: convert USD to INR and INR to USD
+  const rate = exchangeRate?.rate || 1;
+  const displayTargetINR = stats.totalTargetINR + stats.totalTargetUSD * rate;
+  const displaySavedINR = stats.totalSavedINR + stats.totalSavedUSD * rate;
+  const displayTargetUSD = stats.totalTargetUSD + stats.totalTargetINR / rate;
+  const displaySavedUSD = stats.totalSavedUSD + stats.totalSavedINR / rate;
 
   return (
     <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-6 text-white mb-8">
@@ -43,20 +41,23 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Total Targets: Combined */}
         <div>
-          <h3 className="text-purple-200 text-sm mb-1">Total Targets</h3>
-          <p className="text-2xl font-bold">{formatCurrency(stats.totalTarget, 'INR')}</p>
-          {exchangeRate && (
-            <p className="text-purple-200 text-sm">{formatCurrency(convertedTargetUSD, 'USD')}</p>
-          )}
+          <h3 className="text-purple-200 text-sm mb-1">Total Targets (INR)</h3>
+          <p className="text-2xl font-bold">{formatCurrency(displayTargetINR, 'INR')}</p>
+          <h3 className="text-purple-200 text-sm mb-1 mt-2">Total Targets (USD)</h3>
+          <p className="text-purple-200 text-sm">{formatCurrency(displayTargetUSD, 'USD')}</p>
         </div>
+
+        {/* Total Saved: Combined */}
         <div>
-          <h3 className="text-purple-200 text-sm mb-1">Total Saved</h3>
-          <p className="text-2xl font-bold">{formatCurrency(stats.totalSaved, 'INR')}</p>
-          {exchangeRate && (
-            <p className="text-purple-200 text-sm">{formatCurrency(convertedSavedUSD, 'USD')}</p>
-          )}
+          <h3 className="text-purple-200 text-sm mb-1">Total Saved (INR)</h3>
+          <p className="text-2xl font-bold">{formatCurrency(displaySavedINR, 'INR')}</p>
+          <h3 className="text-purple-200 text-sm mb-1 mt-2">Total Saved (USD)</h3>
+          <p className="text-purple-200 text-sm">{formatCurrency(displaySavedUSD, 'USD')}</p>
         </div>
+
+        {/* Overall Progress */}
         <div>
           <h3 className="text-purple-200 text-sm mb-1">Overall Progress</h3>
           <p className="text-2xl font-bold">{stats.overallProgress.toFixed(1)}%</p>

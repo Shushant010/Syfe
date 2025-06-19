@@ -74,20 +74,42 @@ const Index = () => {
   };
 
   const calculateDashboardStats = (): DashboardStats => {
-    const totalTarget = goals.reduce((sum, goal) => sum + goal.targetAmount, 0);
-    const totalSaved = goals.reduce((sum, goal) => sum + goal.savedAmount, 0);
-    let overallProgress = 0;
+  const rate = exchangeRate?.rate || 1;
 
-    if (goals.length > 0) {
-      const totalProgress = goals.reduce((sum, goal) => {
-        const prog = goal.targetAmount > 0 ? (goal.savedAmount / goal.targetAmount) * 100 : 0;
-        return sum + Math.min(prog, 100);
-      }, 0);
-      overallProgress = totalProgress / goals.length;
-    }
+  // Sum targets and saved by currency
+  const totalTargetINR = goals
+    .filter(g => g.currency === 'INR')
+    .reduce((sum, g) => sum + g.targetAmount, 0);
+  const totalSavedINR = goals
+    .filter(g => g.currency === 'INR')
+    .reduce((sum, g) => sum + g.savedAmount, 0);
 
-    return { totalTarget, totalSaved, overallProgress };
+  const totalTargetUSD = goals
+    .filter(g => g.currency === 'USD')
+    .reduce((sum, g) => sum + g.targetAmount, 0);
+  const totalSavedUSD = goals
+    .filter(g => g.currency === 'USD')
+    .reduce((sum, g) => sum + g.savedAmount, 0);
+
+  // Overall progress — average of each goal’s completion %
+  let overallProgress = 0;
+  if (goals.length > 0) {
+    const totalProgress = goals.reduce((sum, g) => {
+      const prog = g.targetAmount > 0 ? (g.savedAmount / g.targetAmount) * 100 : 0;
+      return sum + Math.min(prog, 100);
+    }, 0);
+    overallProgress = totalProgress / goals.length;
+  }
+
+  return {
+    totalTargetINR,
+    totalSavedINR,
+    totalTargetUSD,
+    totalSavedUSD,
+    overallProgress,
   };
+};
+
 
   const dashboardStats = calculateDashboardStats();
 

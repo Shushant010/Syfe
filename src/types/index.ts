@@ -22,7 +22,9 @@ export interface ExchangeRate {
 }
 
 export interface DashboardStats {
-  totalTarget: number;
-  totalSaved: number;
+  totalTargetINR: number;
+  totalSavedINR: number;
+  totalTargetUSD: number;
+  totalSavedUSD: number;
   overallProgress: number;
 }
