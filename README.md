@@ -23,7 +23,7 @@ Track multiple goals in INR or USD, log contributions, visualize savings over ti
 
 ---
 
-### Dependencies 
+## Dependencies 
 -npm install
 -npm install react react-dom
 -npm install recharts date-fns
