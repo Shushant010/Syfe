@@ -23,10 +23,17 @@ Track multiple goals in INR or USD, log contributions, visualize savings over ti
 
 ---
 
+### Dependencies 
+npm install
+npm install react react-dom
+npm install recharts date-fns
+npm install jspdf jspdf-autotable
+npm install uuid lucide-react
+
 ## 📺 Demo
 
-> Include a live link or GIF here once deployed  
-> _e.g._: https://username.github.io/target-achiever
+LIVE LINK :
+https://syfe.vercel.app/
 
 ---
 
