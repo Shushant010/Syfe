@@ -8,6 +8,27 @@ Track multiple goals in INR or USD, log contributions, visualize savings over ti
 ![Image](https://github.com/user-attachments/assets/e7898155-1dae-4839-bfd2-679cb93e4564)
 ![Image](https://github.com/user-attachments/assets/1d0ccbc0-d61a-4582-8a49-67aff75fc1c3)
 
+---
+
+## Dependencies
+
+npm install
+
+
+npm install react react-dom
+
+
+npm install recharts date-fns
+
+
+npm install jspdf jspdf-autotable
+
+
+npm install uuid lucide-react
+
+
+---
+
 ## 📌 Table of Contents
 
 - [Demo](#demo)  
@@ -23,12 +44,7 @@ Track multiple goals in INR or USD, log contributions, visualize savings over ti
 
 ---
 
-## Dependencies 
--npm install
--npm install react react-dom
--npm install recharts date-fns
--npm install jspdf jspdf-autotable
--npm install uuid lucide-react
+
 
 ## 📺 Demo
 
@@ -123,3 +139,5 @@ target-achiever/
 ├── tailwind.config.js
 ├── tsconfig.json
 └── README.md
+
+
