@@ -24,11 +24,11 @@ Track multiple goals in INR or USD, log contributions, visualize savings over ti
 ---
 
 ### Dependencies 
-npm install
-npm install react react-dom
-npm install recharts date-fns
-npm install jspdf jspdf-autotable
-npm install uuid lucide-react
+-npm install
+-npm install react react-dom
+-npm install recharts date-fns
+-npm install jspdf jspdf-autotable
+-npm install uuid lucide-react
 
 ## 📺 Demo
 
